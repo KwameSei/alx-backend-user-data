@@ -60,14 +60,7 @@ def before_request_func() -> str:
                       '/api/v1/unauthorized/',
                       '/api/v1/forbidden/']
     if not auth.require_auth(request.path, excluded_paths):
-        header = request.headers.get('Authorization')
-        if header:
-            token = header.split(' ')[1]
-            if token:
-                user = auth.current_user(request)
-                if user:
-                    request.current_user = user
-                    return
+        return
 
     if auth.authorization_header(request) is None:
         abort(401)
