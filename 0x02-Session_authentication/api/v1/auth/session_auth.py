@@ -20,7 +20,7 @@ class SessionAuth(Auth):
             return None
 
         session_id = str(uuid4())   # create session_id
-        if not session_id:
+        if session_id is None:
             return None
 
         self.user_id_by_session_id[session_id] = user_id   # add to dictionary
@@ -30,7 +30,7 @@ class SessionAuth(Auth):
         """
           Returning a User ID based on a Session ID
         """
-        if not session_id or isinstance(session_id, str) != True:  # if session_id is None
+        if session_id is None or isinstance(session_id, str) != True:  # if session_id is None
             return None
 
         return self.user_id_by_session_id.get(session_id)   # return user_id
