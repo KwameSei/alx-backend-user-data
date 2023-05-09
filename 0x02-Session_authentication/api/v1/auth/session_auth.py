@@ -18,11 +18,11 @@ class SessionAuth(Auth):
         """
           Implement a Session ID for a user_id
         """
-        if not user_id or isinstance(user_id) != str:  # if user_id is None
+        if not user_id or isinstance(user_id, str) != str:  # if user_id is None
             return None
 
-        session_id = str(uuid4())   # create session_id
-        if session_id is None:
+        session_id = str(uuid4())  # create session_id
+        if not session_id:
             return None
 
         self.user_id_by_session_id[session_id] = user_id   # add to dictionary
