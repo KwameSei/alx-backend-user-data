@@ -48,3 +48,21 @@ class DB:
             raise NoResultFound
 
         return user
+
+    def update_user(self, user_id: int, **kwargs: dict) -> None:
+        """ Method that updates user's attributes """
+        if kwargs is None:
+            raise ValueError
+
+        try:
+            user = self.find_user_by(id=user_id)    # Find user by id
+            for key, value in kwargs.items():   # Update user's attributes
+                if key not in user.__dict__:    # If attribute does not exist
+                    raise ValueError
+                else:
+                    setattr(user, key, value)   # Set attribute
+            self._session.commit()   # Commit changes
+        except NoResultFound:
+            pass
+
+        return None
