@@ -38,13 +38,13 @@ class DB:
         self._session.commit()   # Commits all changes
         return user  # Returns the new User object
 
-    def find_user_by(self, **kwargs):
+    def find_user_by(self, **kwargs: dict) -> User:
         """ Method that returns user found in database """
-        if not kwargs:
+        if kwargs is None:
             raise InvalidRequestError
 
         user = self.__session.query(User).filter_by(**kwargs).first()
-        if not user:    # If no user found, raise NoResultFound
+        if user is None:    # If no user found, raise NoResultFound
             raise NoResultFound
 
         return user
