@@ -38,7 +38,7 @@ class DB:
         self._session.commit()   # Commits all changes
         return user  # Returns the new User object
 
-    def find_user_by(self, **kwargs: dict) -> User:
+    def find_user_by(self, **kwargs):
         """ Method that returns user found in database """
         if not kwargs:
             raise InvalidRequestError
