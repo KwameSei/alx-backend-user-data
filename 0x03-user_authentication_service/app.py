@@ -16,9 +16,10 @@ def welcome() -> str:
     """
     return jsonify({"message": "Bienvenue"})  # jsonify converts dict to JSON
 
+
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users() -> str:
-    """ POST /users route 
+    """ POST /users route
     Register the user with email and password
     """
     email = request.form.get('email')
@@ -27,7 +28,7 @@ def users() -> str:
     try:
         user = AUTH.register_user(email, password)
         return jsonify({"email": "{}".format(user.email),
-                      "message": "user created"}), 200
+                       "message": "user created"}), 200
     except ValueError:
         return jsonify({"message": "email already registered"}), 400
 
