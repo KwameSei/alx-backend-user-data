@@ -27,9 +27,10 @@ def users() -> str:
 
     try:
         user = AUTH.register_user(email, password)
-        return jsonify({"email": "{}".format(user.email),
-                       "message": "user created"}), 200
-    except ValueError:
+        if user is not None:
+          return jsonify({"email": "{}".format(user.email),
+                         "message": "user created"}), 200
+    except Exception:
         return jsonify({"message": "email already registered"}), 400
 
 
